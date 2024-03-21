@@ -37,41 +37,10 @@ const purchaseProducts = async (cid) => {
                   window.location.reload();
                 }
               });
-            } else {
-              if (result.paymentIntent.status === "succeeded") {
-                confirmPurchase(cartId);
-              }
             }
           });
       } else {
         console.log(res.payload);
-      }
-    });
-};
-
-const confirmPurchase = (cartId) => {
-  fetch(
-    `${window.location.protocol}//${window.location.host}/api/carts/${cartId}/confirmPurchase`,
-    { method: "POST" }
-  )
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.status === "success") {
-        Swal.fire({
-          html: `<p>${res.user.user}, su pago fue realizado con éxito. Monto $${res.payload.ticket.amount}</p> <p>Conserve su número de seguimento: ${res.payload.ticket.code}</p> `,
-          icon: res.status,
-          showConfirmButton: true,
-          confirmButtonText: "Continuar",
-        }).then(async (result) => {
-          if (result.isConfirmed) {
-            window.location.replace("/api/products");
-          }
-        });
-      } else {
-        Swal.fire({
-          html: `<p>${res.payload}</p> `,
-          icon: res.status,
-        });
       }
     });
 };

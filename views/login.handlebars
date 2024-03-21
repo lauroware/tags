@@ -4,34 +4,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar sesión</title>
     <style>
-      /* Estilos CSS */ body { font-family: Arial, sans-serif; background-color:
-      #f7f7f7; } .containerAuth { max-width: 400px; margin: 0 auto; padding:
-      20px; background-color: #fff; border: 1px solid #ddd; border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); } h1 { text-align: center;
-      color: #333; } .form-group { margin-bottom: 20px; } .form-control { width:
-      100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; } .btn {
-      width: 100%; padding: 10px; border: none; border-radius: 5px; cursor:
-      pointer; font-weight: bold; } .btn-success { background-color: #000000;
-      color: #fff; } .btn-success:hover { background-color: #000000; }
-      .text-left { text-align: left; }
+      /* Estilos CSS */ body { font-family: Arial, sans-serif; background-image:
+      url('https://t3.ftcdn.net/jpg/04/24/35/24/360_F_424352469_WJYlrdisV68nj5yh3MWteLh8qohN7AZU.jpg');
+      background-size: cover; background-repeat: no-repeat; background-position:
+      center; color: #333; display: flex; /* Utilizar flexbox para centrar el
+      contenido verticalmente */ justify-content: center; /* Centrar
+      horizontalmente */ align-items: center; /* Centrar verticalmente */
+      min-height: 100vh; /* Ajustar el tamaño mínimo del cuerpo para ocupar toda
+      la pantalla */ } .containerAuth { max-width: 400px; padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8); border: 1px solid #ddd;
+      border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      text-align: center; /* Añadido para centrar el contenido */ } h1 {
+      text-align: center; color: #333; } .form-group { margin-bottom: 20px; }
+      .form-control { width: 100%; padding: 10px; border: 1px solid #ddd;
+      border-radius: 5px; } .btn { width: 100%; padding: 10px; border: none;
+      border-radius: 5px; cursor: pointer; font-weight: bold; } .btn-success {
+      background-color: #000000; color: #fff; } .btn-success:hover {
+      background-color: #000000; } .text-left { text-align: left; } /* Estilos
+      para el logo */ .logo { max-width: 100%; /* Ajustar el tamaño máximo del
+      logo */ height: auto; /* Mantener la proporción de la imagen */ }
     </style>
   </head>
   <body>
     <div class="containerAuth">
+      <a href="https://ibb.co/QbxPvRR">
+        <img
+          src="https://i.ibb.co/X2G7xgg/Logo-Veterinaria-Tienda-Mascotas-Simple-Beige-1-colores.png"
+          alt="Logo-Veterinaria-Tienda-Mascotas-Simple-Beige-1-colores"
+          class="logo"
+          border="0"
+        />
+      </a>
       <h1>Iniciar sesión</h1>
       <form class="form" role="form" autocomplete="off" id="formLogin">
-
         <div class="form-group">
           <input
-            id="email"
-            name="email"
-            placeholder="Correo electrónico"
+            id="tag"
+            name="tag"
+            placeholder="Número de tag"
             class="form-control"
-            type="email"
+            type="text"
             required
           />
         </div>
-
         <div class="form-group">
           <input
             id="password"
@@ -42,7 +57,6 @@
             required
           />
         </div>
-
         <div class="form-group">
           <input
             class="btn btn-success my-3"
@@ -51,21 +65,12 @@
           />
         </div>
       </form>
-      <div class="text-left">
-        <button
-          class="btn btn-success my-3"
-          onclick="location.href = '/auth/github'"
-        >Registrarse con Github</button>
-        <button
-          class="btn btn-success my-3"
-          onclick="location.href = '/auth/register'"
-        >Registrarse</button>
-        <button
-          class="btn btn-success my-3"
-          onclick="location.href = '/auth/restorePassword'"
-        >Recuperar contraseña</button>
-      </div>
+      <button
+        class="btn btn-success my-3"
+        onclick="location.href = '/auth/restorePassword'"
+      >Solicitar recupero de contraseña</button>
     </div>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/login.js"></script>
   </body>

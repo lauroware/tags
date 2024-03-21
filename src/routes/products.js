@@ -1,19 +1,18 @@
 import { Router } from "express";
 const productsRouter = Router();
 import {
-    addProduct,
-    getProducts,
-    //deleteAllProducts, 
-    deleteProductById,
-    getProductById,
-    updateProduct
+  addProduct,
+  getProducts,
+  deleteProductById,
+  getProductById,
+  updateProduct,
 } from "../controllers/productManager.js";
-import { premiumOrAdmin } from "../middlewares/index.js"
+import { premiumOrAdmin } from "../middlewares/index.js";
 
 productsRouter.get("/", getProducts);
-productsRouter.get("/:pid", getProductById);
+productsRouter.get("/:pid", getProductById); // Aplica el middleware unrestrictedAccess aquí
 productsRouter.post("/", premiumOrAdmin, addProduct);
 productsRouter.put("/:pid", premiumOrAdmin, updateProduct);
 productsRouter.delete("/:pid", premiumOrAdmin, deleteProductById);
 
-export default productsRouter
+export default productsRouter;

@@ -1,42 +1,56 @@
 import UsersDAOMongoDb from "../daos/usersMongooseDao.js";
 import { userSchema } from "../models/users.model.js";
-const userDAO = new UsersDAOMongoDb("users", userSchema)
+const userDAO = new UsersDAOMongoDb("users", userSchema);
 
 class UserRepository {
-    async getAllUsers () {
-        return userDAO.getAllUsers();
-    }
+  async getAllUsers() {
+    return userDAO.getAllUsers();
+  }
 
-    async getUserByEmail (email){ 
-       return userDAO.getUserByEmail(email);
+  async getUserByTag(tag) {
+    try {
+      return userDAO.getUserByTag(tag); // Llamar a la función getUserByTag del objeto userDAO
+    } catch (error) {
+      console.error("Error al obtener usuario por tag:", error);
+      throw error;
     }
-    async saveUser (newUser, cid){
-        return userDAO.saveUser(newUser, cid);
-    }
+  }
 
-    async findUser (user) {
-        return userDAO.findUser(user);
-    }
+  async getUserByEmail(email) {
+    return userDAO.getUserByEmail(email);
+  }
 
-    async updateUserRole (uid, newRole) {
-        return userDAO.updateUserRole(uid, newRole);
-    }
+  async saveUser(newUser, cid) {
+    return userDAO.saveUser(newUser, cid);
+  }
 
-    async deleteUsers () {
-        return userDAO.deleteUsers();
-    }
+  async findUser(user) {
+    return userDAO.findUser(user);
+  }
 
-    async deleteUserById (uid) {
-        return userDAO.deleteUserById(uid);
-    }
+  async updateUserRole(uid, newRole) {
+    return userDAO.updateUserRole(uid, newRole);
+  }
 
-    async deleteInactiveUsers () {
-       return userDAO.deleteInactiveUsers();
-    }
+  async updateUserEmail(uid, newEmail) {
+    return userDAO.updateUserEmail(uid, newEmail);
+  }
 
-    async restorePassword (email, newPassword) {
-        return userDAO.restorePassword(email, newPassword);
-    }
+  async deleteUsers() {
+    return userDAO.deleteUsers();
+  }
+
+  async deleteUserById(uid) {
+    return userDAO.deleteUserById(uid);
+  }
+
+  async deleteInactiveUsers() {
+    return userDAO.deleteInactiveUsers();
+  }
+
+  async restorePassword(email, newPassword) {
+    return userDAO.restorePassword(email, newPassword);
+  }
 }
 
-export default UserRepository
+export default UserRepository;

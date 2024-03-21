@@ -1,55 +1,80 @@
 <style>
-  .containerAdmin { display: flex; flex-direction: column; align-items: center;
-  } .usersAdmin, .productsAdmin { display: flex; flex-wrap: wrap;
-  justify-content: center; } .card { margin: 10px; }     .footer {
-            text-align: center;
-            margin-top: 20px;
-        }
+  .containerAdmin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .usersAdmin,
+  .productsAdmin {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card {
+    margin: 10px;
+    width: 300px; /* Ancho fijo para la tarjeta */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .card-body {
+    padding: 15px;
+  }
+  .form-control {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .card-footer {
+    padding: 10px 15px;
+    text-align: right;
+  }
 </style>
+
 <div class="containerAdmin">
   <h1>Hola</h1>
-<h2>
-    Bienvenido {{user.user}}, con tag: {{user.tag}}. Por favor actualiza tu correo electrónico, se te solicitará en caso de que necesites una nueva contraseña.
+  <h2>
+    Bienvenido
+    {{user.user}}, por favor actualiza tu correo electrónico, se te solicitará
+    en caso de que necesites una nueva contraseña.
   </h2>
-  <div class="card">
-    <div class="card-body">
-      <form class="form" role="form" autocomplete="off" id="formUserAdmin">
-        <input
-          class="form-cotrol"
-          type="hidden"
-          name="userId"
-          value="{{user._id}}"
-        />
-        <label for="tag">Tag:</label>
-        <input
-          class="form-control"
-          type="text"
-          name="tag"
-          value="{{user.tag}}"
-          readonly
-        />
-        <label for="email">Email:</label>
-         <input
-              class="form-control"
-              id="newEmail-{{_id}}"
-              type="text"
-              name="newRole"
-              value="{{user.email}}"
-            />
-      </form>
-    </div>
-    <div class="card-footer">
-      <button
-        type="button"
-        class="btn btn-outline-success"
-        onclick="updateUserEmail('{{user._id}}')"
-      >
-        Actualizar
-      </button>
+  <h3>Tu usuario:</h3>
+  <div class="usersAdmin">
+    <div class="card">
+      <div class="card-body">
+        <form class="form" role="form" autocomplete="off" id="formUserAdmin">
+          <input
+            class="form-control"
+            type="hidden"
+            name="userId"
+            value="{{user._id}}"
+          />
+          <label for="tag">Tag:</label>
+          <input
+            class="form-control"
+            type="text"
+            name="tag"
+            value="{{user.tag}}"
+            readonly
+          />
+          <label for="email">Email:</label>
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            value="{{user.email}}"
+          />
+        </form>
+      </div>
+      <div class="card-footer">
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          onclick="updateUserRole('{{user._id}}')"
+        >Actualizar</button>
+      </div>
     </div>
   </div>
 </div>
-
 
   <h3>Mi mascota:</h3>
   <!-- Button trigger modal -->
@@ -64,6 +89,8 @@
   >
     <!-- Modal content here -->
   </div>
+
+  <h3>Productos:</h3>
   <div class="productsAdmin">
     {{#each allProducts}}
       <div class="card">
@@ -96,7 +123,7 @@
               name="title"
               value="{{title}}"
             />
-            <label for="thumbnail">Url de la foto:</label>
+            <label for="thumbnail">Thumbnail:</label>
             <input
               id="newThumbnail-{{_id}}"
               type="text"
@@ -159,20 +186,10 @@
             class="btn btn-outline-success"
             onclick="updateProduct('{{_id}}')"
           >Actualizar</button>
-           <a href="api/products/{{this._id}}" class="btn btn-primary">Ver
-                página pública</a>
         </div>
       </div>
     {{/each}}
   </div>
 </div>
-
-   <div class="footer">
-      Desarrollado por
-      <a href="https://lauroware.github.io/portfolio/" target="_blank">Lauro
-        Ware</a>
-      - Sitio de nuestra empresa:
-      <a href="www.totinas.com.ar"> Totinas</a>
-    </div>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/adminView.js"></script>

@@ -1,10 +1,12 @@
 import {
   serviceGetAllUsers,
+  serviceGetUserByTag,
   serviceSaveUser,
   serviceLoginUser,
   serviceDeleteAllUsers,
   serviceDeleteUserById,
   serviceUpdateUserRole,
+  serviceUpdateUserEmail,
   serviceRestorePassword,
   serviceGetUserByEmail,
 } from "../services/auth.js";
@@ -26,32 +28,42 @@ const loginForm = (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const user = await serviceLoginUser(req.body);
-    const validPassword = isValidPassword(user, req.body.password);
-    if (validPassword) {
-      const userDate = await userModel.findOneAndUpdate(
-        { email: user.email },
-        { lastLoginDate: new Date() },
-        { new: true }
-      );
-      req.session.user = user;
-      const response = {
-        status: "success",
-        payload: {
-          message: "Login Success",
-          cartId: user.cartId,
-          userDate: userDate,
-        },
-        redirectTo: "/api/products",
-      };
-      res.send(response);
-    } else {
+    const user = await serviceGetUserByTag(req.body.tag); // Cambiar a la función que busca usuarios por número de tag
+
+    if (!user) {
       res
         .status(404)
-        .send({ status: "error", payload: "Incorrect Email/Password" });
+        .send({ status: "error", payload: "Usuario no encontrado" });
+      return;
     }
+
+    const validPassword = isValidPassword(user, req.body.password);
+    if (!validPassword) {
+      res
+        .status(401)
+        .send({ status: "error", payload: "Contraseña incorrecta" });
+      return;
+    }
+
+    const userDate = await userModel.findOneAndUpdate(
+      { tag: user.tag }, // Cambiar el campo de búsqueda a número de tag
+      { lastLoginDate: new Date() },
+      { new: true }
+    );
+
+    req.session.user = user;
+    const response = {
+      status: "success",
+      payload: {
+        message: "Inicio de sesión exitoso",
+        userDate: userDate,
+      },
+      redirectTo: "/api/products",
+    };
+    res.send(response);
   } catch (error) {
-    res.status(500).send({ status: "error", payload: "Error with the server" });
+    console.error("Error en el inicio de sesión:", error);
+    res.status(500).send({ status: "error", payload: "Error en el servidor" });
   }
 };
 
@@ -96,13 +108,26 @@ const updateUserRole = async (req, res) => {
   const { uid, newRole } = req.body;
   try {
     const updatedUser = await serviceUpdateUserRole(uid, newRole);
+    res.status(200).send({
+      status: "success",
+      payload: "User role updated",
+      user: updatedUser,
+    });
+  } catch (error) {
     res
-      .status(200)
-      .send({
-        status: "success",
-        payload: "User role updated",
-        user: updatedUser,
-      });
+      .status(500)
+      .send({ status: "error", payload: "Error updating user role" });
+  }
+};
+const updateUserEmail = async (req, res) => {
+  const { uid, newEmail } = req.body;
+  try {
+    const updatedUser = await serviceUpdateUserEmail(uid, newEmail);
+    res.status(200).send({
+      status: "success",
+      payload: "User email updated",
+      user: updatedUser,
+    });
   } catch (error) {
     res
       .status(500)
@@ -164,13 +189,11 @@ const restorePassword = async (req, res) => {
     const updatedUser = await serviceRestorePassword(email, newPassword);
 
     await serviceDeleteTokenById(tokenReset._id);
-    res
-      .status(200)
-      .send({
-        status: "success",
-        payload: "User password updated",
-        user: updatedUser,
-      });
+    res.status(200).send({
+      status: "success",
+      payload: "User password updated",
+      user: updatedUser,
+    });
   } catch (error) {
     res
       .status(500)
@@ -237,12 +260,10 @@ const deleteInactiveUsers = async (req, res) => {
       payload: "Usuarios inactivos eliminados correctamente.",
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        status: "error",
-        payload: "Error trying to delete inactive users.",
-      });
+    res.status(500).json({
+      status: "error",
+      payload: "Error trying to delete inactive users.",
+    });
   }
 };
 
@@ -284,6 +305,7 @@ export {
   deleteInactiveUsers,
   adminView,
   updateUserRole,
+  updateUserEmail,
   restorePassword,
   renderRestorePassword,
   sendTokenToEmail,

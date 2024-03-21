@@ -40,19 +40,7 @@
                   href="/api/products"
                 >Inicio</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url}}" id="cartLink">Carrito
-                  <span class="linkForm" id="cartQuantity"></span>
-                </a>
-              </li>
 
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  aria-current="page"
-                  href="/auth/tickets"
-                >Tickets</a>
-              </li>
             </ul>
             <ul class="navbar-nav">
               {{#if isPremium}}
@@ -68,18 +56,9 @@
                   <a
                     class="nav-link btn btn-outline-primary"
                     href="/auth/adminView"
-                  >Admin View</a>
+                  >Perfil de Usuario</a>
                 </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    aria-current="page"
-                    href="/api/mockingProducts/"
-                  >Mocking</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/api/docs">Documentación</a>
-                </li>
+
               {{/if}}
 
               <li class="nav-item">

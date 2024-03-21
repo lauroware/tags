@@ -57,10 +57,19 @@ const getProducts = async (req, res) => {
 const getProductById = async (req, res) => {
   const id = req.params.pid;
   let user = req.session.user;
+
   try {
+    // Obtener los detalles del producto
     let product = await serviceGetProductById(id);
+
+    // Agregar un console.log para verificar los datos del producto
+    console.log("Datos del producto:", product);
+
+    // Verificar si el usuario es administrador o premium
     let isAdmin = isUserAdmin(user);
     let isPremium = isUserPremium(user);
+
+    // Renderizar la plantilla con los datos del producto y otras variables
     res.render("details", {
       product,
       user,
@@ -133,33 +142,7 @@ const deleteProductById = async (req, res) => {
   try {
     const deletedProduct = await serviceDeleteProductById(id);
 
-    const premiumUsers = await userModel
-      .find({ role: "premium" })
-      .populate("cartId");
-
-    for (const user of premiumUsers) {
-      const cart = user.cartId;
-      if (cart) {
-        const productExists = cart.products.some(
-          (product) => product.product.toString() === id
-        );
-        if (productExists) {
-          const mailOptions = {
-            from: GMAIL,
-            to: user.email,
-            subject: "Eliminación de producto en carrito",
-            text: `Estimado ${user.first_name},\n\nEl producto en su carrito ha sido eliminado.`,
-          };
-          try {
-            await transporter.sendMail(mailOptions);
-          } catch (error) {
-            res.status(500).send({ message: "Error enviando el correo" });
-          }
-
-          await serviceDeleteProductInCart(cart, id);
-        }
-      }
-    }
+    const premiumUsers = await userModel.find({ role: "premium" });
 
     res.status(200).send({
       message: "Producto borrado exitosamente",

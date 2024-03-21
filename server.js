@@ -19,19 +19,26 @@ import passport from "passport";
 import swaggerUiExpress from "swagger-ui-express";
 import errorHandler from "./src/middlewares/errors/index.js";
 import addLogger from "./src/utils/logger.js";
+import Handlebars from "handlebars";
+
+// Ruta al nuevo middleware
 
 // Configuración inicial
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
+Handlebars.registerHelper("ifEquals", function (arg1, arg2, options) {
+  return arg1 === arg2 ? options.fn(this) : options.inverse(this);
+});
+
 app.engine("handlebars", engine());
-app.set("views", __dirname + "/views");
+app.set("views", path.join(__dirname, "views")); // Corrige la ubicación de las vistas
 app.set("view engine", "handlebars");
 
 initializePassport();
 
-mongoose.connect(DB_URL);
+mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true }); // Corrige la conexión a MongoDB
 // Manejo la conexión a MongoDB
 mongoose.connection.once("open", () => {
   console.log("Conectado a MongoDB");
@@ -51,7 +58,7 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "public"))); // Corrige la ubicación de los archivos estáticos
 
 // Rutas
 app.use(addLogger);
@@ -94,6 +101,18 @@ app.use((req, res, next) => {
   } else {
     res.redirect("/api/products");
   }
+});
+
+let userTag = "";
+
+// Middleware para obtener y almacenar el tag del usuario
+app.use((req, res, next) => {
+  // Aquí debes obtener el tag del usuario de tu sesión o de donde corresponda
+  userTag = req.session.user ? req.session.user.tag : "";
+
+  console.log("Tag del usuario en el middleware:", req.session.user.tag);
+
+  next();
 });
 
 // Exportación del módulo
