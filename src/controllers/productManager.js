@@ -11,6 +11,7 @@ import { serviceDeleteProductInCart } from "../services/cart.js";
 import { userModel } from "../models/users.model.js";
 import transporter from "../utils/mail.js";
 import { GMAIL } from "../config/index.config.js";
+import { productModel } from "../models/products.model.js";
 
 const isUserAdmin = (user) => {
   return user && user.role === "admin";
@@ -153,6 +154,20 @@ const deleteProductById = async (req, res) => {
   }
 };
 
+// Importa el modelo de producto (mascota)
+
+const getAdminView = async (req, res) => {
+  try {
+    const idUsuario = req.usuario.id;
+    const products = await productModel.find({ createdBy: idUsuario });
+    console.log(products); // Verifica los datos que estás enviando
+    res.render("adminView", { products });
+  } catch (error) {
+    console.error("Error al obtener los productos del usuario:", error);
+    res.status(500).send("Error interno del servidor");
+  }
+};
+
 export {
   addProduct,
   getProducts,
@@ -161,4 +176,5 @@ export {
   getProductById,
   updateProduct,
   getProductsFromPremiumUsers,
+  getAdminView,
 };

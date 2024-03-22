@@ -13,6 +13,16 @@ class ProductRepository {
     return productDAO.addProduct(product, uid);
   }
 
+  async getProductsCreatedBy(uid) {
+    try {
+      // Lógica para obtener productos creados por un usuario específico
+      const productsCreatedByUser = await productDAO.getProductsCreatedBy(uid);
+      return productsCreatedByUser;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async getProductsDTO() {
     return productDAO.getAllProductsFromDTO();
   }

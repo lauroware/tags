@@ -3,6 +3,7 @@ import paginate from "mongoose-paginate-v2";
 
 const productSchema = new mongoose.Schema(
   {
+    email: { type: String, required: true, max: 100 },
     title: { type: String, required: true, max: 100 },
     description: { type: String, required: true, max: 100 },
     fechadenacimiento: { type: String, required: true },
@@ -11,7 +12,11 @@ const productSchema = new mongoose.Schema(
     nombredelhumano: { type: String, required: true },
     telefono: { type: String, required: true, max: 100 },
     thumbnail: { type: String, required: true },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: true,
+    },
     tag: { type: String, required: true },
   },
   {

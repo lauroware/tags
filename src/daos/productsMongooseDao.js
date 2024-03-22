@@ -8,6 +8,7 @@ import { generateProductErrorInfo } from "../services/errors/info.js";
 const productDtoFromObject = (obj) => {
   const {
     _id,
+    email,
     title,
     thumbnail,
     description,
@@ -20,6 +21,7 @@ const productDtoFromObject = (obj) => {
   } = obj;
   return new ProductDTO(
     _id,
+    email,
     title,
     thumbnail,
     description,
@@ -36,6 +38,7 @@ const allProductsFromObject = (products) => {
   return products.map((product) => {
     const {
       _id,
+      email,
       title,
       description,
       fechadenacimiento,
@@ -48,6 +51,7 @@ const allProductsFromObject = (products) => {
     } = product;
     return new ProductDTO(
       _id,
+      email,
       title,
       description,
       fechadenacimiento,
@@ -96,6 +100,7 @@ class ProductsDAOMongoDb extends ContenedorMongoDb {
   async addProduct(product, uid) {
     try {
       const {
+        email,
         title,
         description,
         fechadenacimiento,
@@ -107,6 +112,7 @@ class ProductsDAOMongoDb extends ContenedorMongoDb {
         tag,
       } = product;
       if (
+        !email ||
         !title ||
         !description ||
         !fechadenacimiento ||

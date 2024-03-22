@@ -126,7 +126,7 @@ const createNewProduct = async () => {
 
 const updateProduct = async (pid) => {
   const data = {};
-
+  const newEmail = document.getElementById(`newEmail-${pid}`).value;
   const newTitle = document.getElementById(`newTitle-${pid}`).value;
   const newDescription = document.getElementById(`newDescription-${pid}`).value;
   const newThumbnail = document.getElementById(`newThumbnail-${pid}`).value;
@@ -145,17 +145,20 @@ const updateProduct = async (pid) => {
   const newTelefono = document.getElementById(`newTelefono-${pid}`).value;
 
   if (
+    newEmail ||
     newTitle ||
     newDescription ||
     newThumbnail ||
     newFechadenacimiento ||
     newMedicamentos ||
-    newFechadenacimiento ||
+    newEnfermedades ||
     newNombredelhumano ||
     newTelefono
   ) {
     data.pid = pid;
     data.updates = {
+      email: newEmail,
+      title: newTitle,
       title: newTitle,
       description: newDescription,
       thumbnail: newThumbnail,

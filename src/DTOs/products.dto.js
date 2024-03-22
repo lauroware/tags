@@ -1,6 +1,7 @@
 class ProductDTO {
   constructor(
     _id,
+    email,
     title,
     description,
     fechadenacimiento,
@@ -12,6 +13,7 @@ class ProductDTO {
     tag
   ) {
     this._id = _id;
+    this.email = email;
     this.title = title;
     this.description = description;
     this.fechadenacimiento = fechadenacimiento;

@@ -20,6 +20,8 @@ import swaggerUiExpress from "swagger-ui-express";
 import errorHandler from "./src/middlewares/errors/index.js";
 import addLogger from "./src/utils/logger.js";
 import Handlebars from "handlebars";
+import helper from "handlebars-helpers";
+import productRoutes from "./src/routes/products.js";
 
 // Ruta al nuevo middleware
 
@@ -28,13 +30,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
-Handlebars.registerHelper("ifEquals", function (arg1, arg2, options) {
-  return arg1 === arg2 ? options.fn(this) : options.inverse(this);
-});
-
 app.engine("handlebars", engine());
 app.set("views", path.join(__dirname, "views")); // Corrige la ubicación de las vistas
 app.set("view engine", "handlebars");
+
+// Registro del helper en Handlebars
+Handlebars.registerHelper("ifEquals", function (arg1, arg2, options) {
+  return arg1 === arg2 ? options.fn(this) : options.inverse(this);
+});
 
 initializePassport();
 
@@ -78,6 +81,19 @@ app.get("/loggerTest", (req, res) => {
 app.get("/", (req, res) => {
   res.redirect("/auth/login");
 });
+
+app.use("/auth", productRoutes);
+
+const getAllProductsCreatedBy = async (uid) => {
+  try {
+    const allProducts = await productModel.find({ createdBy: uid });
+    return allProductsFromObject(allProducts); // Supongamos que allProductsFromObject es una función que formatea los productos
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+// Ruta para mostrar los productos (mascotas) del usuario en la página adminView.handlebars
 
 // Documentación de Swagger
 const swaggerOptions = {

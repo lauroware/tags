@@ -36,7 +36,7 @@ authRouter.get("/register", registerForm);
 
 authRouter.post("/register", register);
 
-authRouter.get("/adminView", adminOnly, adminView);
+authRouter.get("/adminView", adminOnly, adminView, getProductsFromPremiumUsers);
 
 authRouter.get("/", adminOnly, getAllUsers);
 
@@ -47,7 +47,12 @@ authRouter.put(
   updateUserEmail
 );
 
-authRouter.delete("/adminView/users", adminOnly, deleteAllUsers);
+authRouter.delete(
+  "/adminView/users",
+  adminOnly,
+  deleteAllUsers,
+  getProductsFromPremiumUsers
+);
 
 authRouter.delete("/adminView/users/:uid", adminOnly, deleteUserById);
 
