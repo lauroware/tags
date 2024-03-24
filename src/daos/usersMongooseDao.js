@@ -4,14 +4,15 @@ import UserDTO from "../DTOs/users.dto.js";
 import { createHash } from "../utils/index.js";
 
 const userDtoFromObj = (obj) => {
-  const { _id, first_name, last_name, email, age, password, role } = obj;
+  const { _id, first_name, last_name, email, age, password, role, tag } = obj;
   let userDTO = new UserDTO(
     _id,
     `${first_name} ${last_name}`,
     email,
     age,
     password,
-    role
+    role,
+    tag
   );
   return userDTO;
 };

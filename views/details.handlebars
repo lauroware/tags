@@ -43,14 +43,18 @@
         <div class="card-body">
           <img src="{{product.description}}" alt="" />
           <h1 class="card-title">Hola, soy {{product.title}}</h1>
-          <h6
-            class="card-subtitle mb-2 text-muted"
-          >Descripción:{{product.fechadenacimiento}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Descripción:
+            {{product.fechadenacimiento}}</h6>
           <p class="card-text">Año de nacimiento: {{product.medicamentos}}</p>
           <p class="card-text">Medicamentos: {{product.enfermedades}}</p>
           <p class="card-text">Historia clínica: {{product.nombredelhumano}}</p>
           <p class="card-text">Nombre de mi humano: {{product.telefono}}</p>
-          <p class="card-text">Teléfono: {{product.thumbnail}}</p>
+          <p class="card-text">Teléfono:
+            <a
+              href="https://wa.me/+54{{thumbnail}}"
+              target="_blank"
+            >{{product.thumbnail}}</a></p>
+
           <p class="card-text">Si me encontraste, por favor teneme paciencia,
             voy a estar muy asustado.</p>
         </div>

@@ -35,7 +35,7 @@ app.set("views", path.join(__dirname, "views")); // Corrige la ubicación de las
 app.set("view engine", "handlebars");
 
 // Registro del helper en Handlebars
-Handlebars.registerHelper("ifEquals", function (arg1, arg2, options) {
+Handlebars.registerHelper("ifEzquals", function (arg1, arg2, options) {
   return arg1 === arg2 ? options.fn(this) : options.inverse(this);
 });
 
