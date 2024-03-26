@@ -159,23 +159,6 @@ class UsersDAOMongoDb extends ContenedorMongoDb {
       throw new Error(error);
     }
   }
-
-  async deleteInactiveUsers() {
-    try {
-      // Obtén la fecha actual hace dos días
-      const twoDaysAgo = new Date();
-      twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-
-      // Encuentra y elimina los usuarios inactivos
-      const inactiveUsers = await userModel.deleteMany({
-        lastLoginDate: { $lt: twoDaysAgo },
-      });
-
-      return inactiveUsers;
-    } catch (error) {
-      throw new Error("Error al eliminar usuarios inactivos.");
-    }
-  }
 }
 
 export default UsersDAOMongoDb;

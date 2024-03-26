@@ -6,14 +6,14 @@ const serviceGetProducts = async (filters) => {
   return products;
 };
 
-const serviceGetProductById = async (pid) => {
-  let product = await productRepository.getProductById(pid);
+const serviceGetPetByUserId = async (userId) => {
+  let product = await productRepository.getPetByUserId(userId);
   return product;
 };
 
-const serviceAddProduct = async (product, uid) => {
-  let newProduct = await productRepository.addProduct(product, uid);
-  return newProduct;
+const serviceGetProductById = async (pid) => {
+  let product = await productRepository.getProductById(pid);
+  return product;
 };
 
 const serviceProductsFromDTO = async () => {
@@ -26,14 +26,10 @@ const serviceUpdateProduct = async (pid, updates) => {
   return updatedProduct;
 };
 
-const serviceDeleteAllProducts = async () => {
-  let deleteAllProducts = await productRepository.deleteAllProducts();
-  return deleteAllProducts;
-};
-
-const serviceDeleteProductById = async (pid) => {
-  let deletedProduct = await productRepository.deleteProductById(pid);
-  return deletedProduct;
+const serviceProductsFromUser = async (userId) => {
+  // Asegúrate de que esta función filtra los productos por userId
+  const products = await Product.find({ userId: userId });
+  return products;
 };
 
 const serviceProductsCreatedBy = async (productModel, userId) => {
@@ -49,12 +45,10 @@ const serviceProductsCreatedBy = async (productModel, userId) => {
 };
 
 export {
-  serviceAddProduct,
-  serviceDeleteProductById,
-  serviceDeleteAllProducts,
   serviceGetProductById,
   serviceGetProducts,
   serviceUpdateProduct,
   serviceProductsFromDTO,
   serviceProductsCreatedBy,
+  serviceGetPetByUserId,
 };

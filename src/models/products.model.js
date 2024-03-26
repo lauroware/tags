@@ -18,6 +18,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     tag: { type: String, required: true },
+    userId: { type: String, required: true },
   },
   {
     versionKey: false,

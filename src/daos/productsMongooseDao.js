@@ -18,6 +18,7 @@ const productDtoFromObject = (obj) => {
     nombredelhumano,
     telefono,
     tag,
+    userId,
   } = obj;
   return new ProductDTO(
     _id,
@@ -30,7 +31,8 @@ const productDtoFromObject = (obj) => {
     enfermedades,
     nombredelhumano,
     telefono,
-    tag
+    tag,
+    userId
   );
 };
 
@@ -48,6 +50,7 @@ const allProductsFromObject = (products) => {
       telefono,
       thumbnail,
       tag,
+      userId,
     } = product;
     return new ProductDTO(
       _id,
@@ -60,7 +63,8 @@ const allProductsFromObject = (products) => {
       nombredelhumano,
       telefono,
       thumbnail,
-      tag
+      tag,
+      userId
     );
   });
 };

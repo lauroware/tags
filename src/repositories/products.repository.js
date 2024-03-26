@@ -23,6 +23,10 @@ class ProductRepository {
     }
   }
 
+  async getPetByUserId(userId) {
+    return productDAO.getPetByUserId(userId);
+  }
+
   async getProductsDTO() {
     return productDAO.getAllProductsFromDTO();
   }
@@ -33,12 +37,6 @@ class ProductRepository {
 
   async updateProduct(pid, updates) {
     return productDAO.updateProduct(pid, updates);
-  }
-  async deleteProductById(pid) {
-    return productDAO.deleteProductById(pid);
-  }
-  async deleteAllProducts() {
-    return productDAO.deleteAllProducts();
   }
 }
 

@@ -1,5 +1,4 @@
 import UserRepository from "../repositories/users.repository.js";
-import { serviceAddCart } from "./cart.js";
 const userRepository = new UserRepository();
 const serviceGetAllUsers = async () => {
   let users = await userRepository.getAllUsers();
@@ -14,12 +13,6 @@ const serviceGetUserByEmail = async (email) => {
 const serviceGetUserByTag = async (tag) => {
   let user = await userRepository.getUserByTag(tag);
   return user;
-};
-
-const serviceSaveUser = async (newUser) => {
-  let newCart = await serviceAddCart();
-  let savedUser = await userRepository.saveUser(newUser, newCart._id);
-  return savedUser;
 };
 
 const serviceLoginUser = async (user) => {
@@ -47,11 +40,6 @@ const serviceDeleteUserById = async (uid) => {
   return deletedUser;
 };
 
-const serviceDeleteInactiveUsers = async () => {
-  let deletedUsers = await userRepository.deleteInactiveUsers();
-  return deletedUsers;
-};
-
 const serviceRestorePassword = async (email, newPassword) => {
   let updatedUser = await userRepository.restorePassword(email, newPassword);
   return updatedUser;
@@ -60,11 +48,9 @@ const serviceRestorePassword = async (email, newPassword) => {
 export {
   serviceGetAllUsers,
   serviceGetUserByEmail,
-  serviceSaveUser,
   serviceLoginUser,
   serviceDeleteAllUsers,
   serviceDeleteUserById,
-  serviceDeleteInactiveUsers,
   serviceUpdateUserRole,
   serviceUpdateUserEmail,
   serviceRestorePassword,

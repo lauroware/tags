@@ -2,7 +2,6 @@
 import passport from "passport";
 import GitHubStrategy from "passport-github2";
 import { userModel } from "../models/users.model.js";
-import { serviceAddCart } from "../services/cart.js";
 import { GITHUB_ID, GITHUB_SECRET } from "./index.config.js";
 
 // Inicializamos Passport con la estrategia de autenticación de GitHub
@@ -34,9 +33,6 @@ const initializePassport = () => {
           const user = await userModel.findOne({
             email: profile.emails[0].value,
           });
-
-          // Creamos un nuevo carrito
-          const newCart = await serviceAddCart();
 
           if (!user) {
             // Si el usuario no existe, lo creamos

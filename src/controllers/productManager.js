@@ -1,16 +1,11 @@
 import {
-  serviceAddProduct,
-  serviceDeleteProductById,
-  serviceDeleteAllProducts,
   serviceGetProductById,
   serviceGetProducts,
   serviceUpdateProduct,
   serviceProductsCreatedBy,
 } from "../services/product.js";
-import { serviceDeleteProductInCart } from "../services/cart.js";
 import { userModel } from "../models/users.model.js";
-import transporter from "../utils/mail.js";
-import { GMAIL } from "../config/index.config.js";
+
 import { productModel } from "../models/products.model.js";
 
 const isUserAdmin = (user) => {
@@ -100,20 +95,6 @@ const getProductsFromPremiumUsers = async (req, res) => {
   }
 };
 
-const addProduct = async (req, res) => {
-  let user = req.session.user;
-  try {
-    const newProduct = await serviceAddProduct(req.body, user._id);
-    res.status(201).send({
-      status: "success",
-      message: "Registered succesfully!",
-      payload: newProduct,
-    });
-  } catch (error) {
-    res.status(500).send({ message: "Error adding new Product" });
-  }
-};
-
 const updateProduct = async (req, res) => {
   const { pid, updates } = req.body;
   try {
@@ -129,33 +110,6 @@ const updateProduct = async (req, res) => {
   }
 };
 
-const deleteAllProducts = async (req, res) => {
-  try {
-    const deleteAllProducts = await serviceDeleteAllProducts();
-    res.status(200).send({ message: "Products deleted", deleteAllProducts });
-  } catch (error) {
-    res.status(500).send({ message: "Error trying to delete all products" });
-  }
-};
-
-const deleteProductById = async (req, res) => {
-  const id = req.params.pid;
-  try {
-    const deletedProduct = await serviceDeleteProductById(id);
-
-    const premiumUsers = await userModel.find({ role: "premium" });
-
-    res.status(200).send({
-      message: "Producto borrado exitosamente",
-      payload: deletedProduct,
-    });
-  } catch (error) {
-    res.status(500).send({ message: "Error borrandoe el producto", error });
-  }
-};
-
-// Importa el modelo de producto (mascota)
-
 const getAdminView = async (req, res) => {
   try {
     const idUsuario = req.usuario.id;
@@ -169,10 +123,7 @@ const getAdminView = async (req, res) => {
 };
 
 export {
-  addProduct,
   getProducts,
-  deleteAllProducts,
-  deleteProductById,
   getProductById,
   updateProduct,
   getProductsFromPremiumUsers,

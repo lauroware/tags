@@ -44,10 +44,6 @@ class UserRepository {
     return userDAO.deleteUserById(uid);
   }
 
-  async deleteInactiveUsers() {
-    return userDAO.deleteInactiveUsers();
-  }
-
   async restorePassword(email, newPassword) {
     return userDAO.restorePassword(email, newPassword);
   }

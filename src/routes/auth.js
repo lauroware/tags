@@ -6,24 +6,19 @@ import {
 } from "../middlewares/index.js";
 import {
   login,
-  register,
   logout,
   loginForm,
-  registerForm,
   getAllUsers,
   deleteAllUsers,
   deleteUserById,
-  deleteInactiveUsers,
   adminView,
   updateUserRole,
   updateUserEmail,
   renderRestorePassword,
   restorePassword,
-  sendTokenToEmail,
 } from "../controllers/userManager.js";
 import { getProductById } from "../controllers/productManager.js";
 import passport from "passport";
-import { renderTickets } from "../controllers/stripeManager.js";
 import { getProductsFromPremiumUsers } from "../controllers/productManager.js";
 import SendmailTransport from "nodemailer/lib/sendmail-transport/index.js";
 const authRouter = Router();
@@ -31,10 +26,6 @@ const authRouter = Router();
 authRouter.get("/login", loginForm);
 
 authRouter.post("/login", login);
-
-authRouter.get("/register", registerForm);
-
-authRouter.post("/register", register);
 
 authRouter.get("/adminView", adminOnly, adminView, getProductsFromPremiumUsers);
 
@@ -56,16 +47,10 @@ authRouter.delete(
 
 authRouter.delete("/adminView/users/:uid", adminOnly, deleteUserById);
 
-authRouter.get("/inactive", adminOnly, deleteInactiveUsers);
-
 // La siguiente ruta se convierte en pública
 authRouter.get("/products/:id", getProductById);
 
-authRouter.get("/tickets", authMiddleware, renderTickets);
-
 authRouter.get("/restorePassword", renderRestorePassword);
-
-authRouter.post("/sendTokenToEmail", sendTokenToEmail);
 
 authRouter.put("/restorePassword", restorePassword);
 

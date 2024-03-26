@@ -10,7 +10,8 @@ class ProductDTO {
     nombredelhumano,
     telefono,
     thumbnail,
-    tag
+    tag,
+    userId
   ) {
     this._id = _id;
     this.email = email;
@@ -23,6 +24,7 @@ class ProductDTO {
     this.telefono = telefono;
     this.thumbnail = thumbnail;
     this.tag = tag;
+    this.userId = userId;
   }
 }
 
