@@ -1,3 +1,18 @@
+para correrlo se instala
+Node js
+actualizar librerias con npm install
+
+Se corre con el comando npm run dev
+
+Usa la base de datos mongo db
+
+Los usuarios nuevos los creo directamente con otra aplicación. no van a poder crear usuarios nuevos quien entre a la pagina. En realidad yo creo el usuario (tag) y password lo asociaría a un array de mascotas vacio que solo va a tener id de usuario, tag e id de mascota. Cuando el propietario del tag entra, carga los datos de de la mascota (products), los graba y ya queda el perfil configurado.
+El problema es que la plantilla admin me trae toda la base de datos. Pude hacer que me traiga solo el valor del tag a traves de la propiedad userId pero se me desconfiguró el botón actualizar y no tuve manera de arregarlo.
+Conclusión si se logra que admin.handlebars liste una sola tarjeta (la que coincida el tag o el id) y funcione el botón actualizar estamos hechos.
+El resto yo lo puedo ir arreglando y corrigiendo.
+
+ah tengo dos pantallas admin, la que funciona es admin2, tendrias que cambiarle el nombre a admin, la primera solo trae una tarjeta, pero no los datos.
+
 Usuarios:
 
 se loguea con el tag
