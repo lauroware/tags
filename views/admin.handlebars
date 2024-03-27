@@ -3,16 +3,26 @@
   } .usersAdmin, .productsAdmin { display: flex; flex-wrap: wrap;
   justify-content: center; } .card { margin: 10px; width: 400px; /* Ancho
   ajustable según tu preferencia */ } .footer { text-align: center; margin-top:
-  20px; }
+  20px; } /* Estilos para el título */ .title-container { background-color:
+  #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align:
+  center; width: 80%; } .title-container h1 { margin: 0; font-size: 24px; color:
+  #333; } /* Estilos para los botones dentro de la tarjeta */ .card-footer {
+  display: flex; flex-direction: column; align-items: stretch; /* Hace que los
+  elementos se expandan horizontalmente */ } .card-footer button, .card-footer a
+  { width: 100%; margin-top: 5px; }
 </style>
-
+<br />
 <div class="containerAdmin">
-  <h1>Hola</h1>
-  <h2>
-    Bienvenido
-    {{user.email}}. Por favor actualiza tu correo electrónico, se te solicitará
-    en caso de que necesites una nueva contraseña.
-  </h2>
+
+  <div class="title-container">
+    <h1>
+      Tu número de tag es
+      {{user.tag}}.
+      <br />
+      Por favor actualiza tu correo electrónico, se te solicitará en caso de que
+      necesites una nueva contraseña.
+    </h1>
+  </div>
 
   <h3>Mi mascota:</h3>
   <!-- Button trigger modal -->
