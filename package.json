@@ -34,5 +34,14 @@
     "sweetalert2": "^11.6.13",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lauroware/tags.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lauroware/tags/issues"
+  },
+  "homepage": "https://github.com/lauroware/tags#readme"
 }

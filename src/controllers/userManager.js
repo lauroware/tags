@@ -173,16 +173,25 @@ const adminView = async (req, res) => {
   const allUsers = await serviceGetAllUsers();
   const allProducts = await serviceProductsFromDTO();
   const user = req.session.user;
+  // console.log('session',req.session);
+  console.log("allProducts", allProducts);
   const isAdmin = isUserAdmin(user);
+  // console.log('asdasdadmin');
+  const userProduct = allProducts.find((product) => product.tag === user.tag);
+  console.log("userProduct", userProduct);
+  // console.log('allProducts',allProducts[0])
+
+  // Verificar si se encontró un producto para el usuario actual
+  const filteredProducts = userProduct ? [userProduct] : [];
+
   res.render("admin", {
     user,
     isAdmin,
     allUsers,
-    allProducts,
+    allProducts: filteredProducts,
     style: "index.css",
   });
 };
-
 const logout = (req, res) => {
   req.session.destroy((err) => {
     if (!err) {
