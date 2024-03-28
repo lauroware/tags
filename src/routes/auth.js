@@ -3,6 +3,7 @@ import {
   authMiddleware,
   adminOnly,
   premiumOnly,
+  adminOnly1,
 } from "../middlewares/index.js";
 import {
   login,
@@ -12,6 +13,7 @@ import {
   deleteAllUsers,
   deleteUserById,
   adminView,
+  adminView1,
   updateUserRole,
   updateUserEmail,
   renderRestorePassword,
@@ -28,6 +30,12 @@ authRouter.get("/login", loginForm);
 authRouter.post("/login", login);
 
 authRouter.get("/adminView", adminOnly, adminView, getProductsFromPremiumUsers);
+authRouter.get(
+  "/adminView1",
+  adminOnly1,
+  adminView1,
+  getProductsFromPremiumUsers
+);
 
 authRouter.get("/", adminOnly, getAllUsers);
 

@@ -40,6 +40,10 @@ userSchema.methods.isAdmin = function () {
   return this.role === "admin";
 };
 
+userSchema.methods.isAdmin1 = function () {
+  return this.role === "admin1";
+};
+
 userSchema.pre("save", function (next) {
   const user = this;
   user.password = createHash(this.password);

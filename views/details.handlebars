@@ -10,22 +10,25 @@
       rel="stylesheet"
     />
     <style>
-      /* CSS personalizado para el fondo de la página */ body {
-      background-image:
-      url('https://media.istockphoto.com/id/1417882544/es/foto/gran-grupo-de-gatos-y-perros-mirando-a-la-c%C3%A1mara-sobre-fondo-azul.jpg?s=612x612&w=0&k=20&c=24s5hhdBTwmBC5wS5fXqdlAJHGBYGoTmO0iY6IQFwWM=');
-      background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-      background-position: center; /* Centra la imagen en el fondo */
-      background-repeat: no-repeat; /* Evita la repetición de la imagen */ } /*
-      CSS personalizado para el contenedor principal */ .containerDetails {
-      min-height: 100vh; /* Establece la altura mínima del contenedor como el
-      100% del viewport height */ display: flex; flex-direction: column;
-      justify-content: center; align-items: center; } /* Estilos para el logo */
-      .logo { max-width: 200px; /* Ajusta el tamaño máximo del logo */ height:
-      auto; /* Mantener la proporción de la imagen */ margin-bottom: 20px; /*
-      Espacio inferior para separar el logo de otros elementos */ } /* Estilos
-      para la tarjeta */ .card { width: 80%; /* Ancho de la tarjeta */ } /*
-      Estilos para el footer */ .footer { text-align: center; margin-top: 20px;
-      }
+      body { background-size: cover; /* Ajusta la imagen para cubrir todo el
+      fondo */ background-position: center; /* Centra la imagen en el fondo */
+      background-repeat: no-repeat; /* Evita la repetición de la imagen */
+      {{#if isAdmin1}}
+        background-image:
+        url('https://c.wallhere.com/photos/f5/40/1920x1080_px_abstract_digital_art_Modern_Shattered-783558.jpg!d');
+      {{else}}
+        background-image:
+        url('https://media.istockphoto.com/id/1417882544/es/foto/gran-grupo-de-gatos-y-perros-mirando-a-la-c%C3%A1mara-sobre-fondo-azul.jpg?s=612x612&w=0&k=20&c=24s5hhdBTwmBC5wS5fXqdlAJHGBYGoTmO0iY6IQFwWM=');
+      {{/if}}
+      } .containerDetails { min-height: 100vh; /* Establece la altura mínima del
+      contenedor como el 100% del viewport height */ display: flex;
+      flex-direction: column; justify-content: center; align-items: center; } /*
+      Estilos para el logo */ .logo { max-width: 200px; /* Ajusta el tamaño
+      máximo del logo */ height: auto; /* Mantener la proporción de la imagen */
+      margin-bottom: 20px; /* Espacio inferior para separar el logo de otros
+      elementos */ } /* Estilos para la tarjeta */ .card { width: 80%; /* Ancho
+      de la tarjeta */ } /* Estilos para el footer */ .footer { text-align:
+      center; margin-top: 20px; },
     </style>
   </head>
 
@@ -39,26 +42,44 @@
         class="logo"
       />
       <!-- Card de Bootstrap para mostrar los datos de la mascota -->
-      <div class="card">
-        <div class="card-body">
-          <img src="{{product.description}}" alt="" />
-          <h1 class="card-title">Hola, soy {{product.title}}</h1>
-          <h6 class="card-subtitle mb-2 text-muted">Descripción:
-            {{product.fechadenacimiento}}</h6>
-          <p class="card-text">Año de nacimiento: {{product.medicamentos}}</p>
-          <p class="card-text">Medicamentos: {{product.enfermedades}}</p>
-          <p class="card-text">Historia clínica: {{product.nombredelhumano}}</p>
-          <p class="card-text">Nombre de mi humano: {{product.telefono}}</p>
-          <p class="card-text">Teléfono:
-            <a
-              href="https://wa.me/+54{{thumbnail}}"
-              target="_blank"
-            >{{product.thumbnail}}</a></p>
+      {{#if isAdmin}}
+        <div class="card">
+          <div class="card-body">
+            <img src="{{product.description}}" alt="" />
+            <h1 class="card-title">Hola, soy {{product.title}}</h1>
+            <h6 class="card-subtitle mb-2 text-muted">Descripción:
+              {{product.fechadenacimiento}}</h6>
+            <p class="card-text">Año de nacimiento: {{product.medicamentos}}</p>
+            <p class="card-text">Medicamentos: {{product.enfermedades}}</p>
+            <p class="card-text">Historia clínica:
+              {{product.nombredelhumano}}</p>
+            <p class="card-text">Nombre de mi humano: {{product.telefono}}</p>
+            <p class="card-text">Teléfono:
+              <a
+                href="https://wa.me/+54{{thumbnail}}"
+                target="_blank"
+              >{{product.thumbnail}}</a></p>
 
-          <p class="card-text">Si me encontraste, por favor teneme paciencia,
-            voy a estar muy asustado.</p>
+            <p class="card-text">Si me encontraste, por favor teneme paciencia,
+              voy a estar muy asustado.</p>
+          </div>
         </div>
-      </div>
+      {{else}}
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{product.fechadenacimiento}}</h6>
+            <p class="card-text">Nombre de Contacto: {{product.telefono}}</p>
+            <p class="card-text">Teléfono:
+              <a
+                href="https://wa.me/+54{{product.thumbnail}}"
+                target="_blank"
+              >{{product.thumbnail}}</a></p>
+            <p class="card-text">Correo electrónico: {{product.email}}</p>
+          </div>
+
+        </div>
+      {{/if}}
     </div>
 
     <!-- Footer -->

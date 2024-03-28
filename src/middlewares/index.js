@@ -32,6 +32,19 @@ const adminOnly = async (req, res, next) => {
   }
 };
 
+const adminOnly1 = async (req, res, next) => {
+  const user = await serviceGetUserByEmail(req.session?.user?.email);
+  if (user?.role === "admin1") {
+    next();
+  } else {
+    res.status(401).send({
+      status: "Unauthorized",
+      message: "Unauthorized to do this action",
+      code: 401,
+    });
+  }
+};
+
 const premiumOnly = async (req, res, next) => {
   const user = await serviceGetUserByEmail(req.session?.user?.email);
   if (user?.role === "premium") {
@@ -47,7 +60,7 @@ const premiumOnly = async (req, res, next) => {
 
 const premiumOrAdmin = async (req, res, next) => {
   const user = await serviceGetUserByEmail(req.session?.user?.email);
-  if (user?.role === "premium" || user?.role === "admin") {
+  if (user?.role === "admin1" || user?.role === "admin") {
     next();
   } else {
     res.status(401).send({
@@ -58,4 +71,4 @@ const premiumOrAdmin = async (req, res, next) => {
   }
 };
 
-export { authMiddleware, adminOnly, premiumOnly, premiumOrAdmin };
+export { authMiddleware, adminOnly, adminOnly1, premiumOnly, premiumOrAdmin };

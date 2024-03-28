@@ -84,6 +84,18 @@ app.get("/admin", async (req, res) => {
   res.render("admin", { allProducts: products });
 });
 
+app.get("/admin1", async (req, res) => {
+  // Obtén el ID del usuario de alguna manera. Esto dependerá de cómo estés manejando la autenticación.
+  // Por ejemplo, si estás utilizando Passport y sesiones, podrías obtenerlo de req.user._id.
+  const userId = req.user._id;
+
+  // Utiliza el ID del usuario para filtrar los productos
+  const products = await productModel.find({ userId: userId });
+
+  // Renderiza la vista de administrador con los productos filtrados
+  res.render("admin1", { allProducts: products });
+});
+
 // Manejo de errores y logging
 app.get("/loggerTest", (req, res) => {
   req.logger.warning("ALERTA!");

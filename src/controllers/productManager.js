@@ -12,6 +12,10 @@ const isUserAdmin = (user) => {
   return user && user.role === "admin";
 };
 
+const isUserAdmin1 = (user) => {
+  return user && user.role === "admin1";
+};
+
 const isUserPremium = (user) => {
   return user && user.role === "premium";
 };
@@ -21,6 +25,7 @@ const getProducts = async (req, res) => {
   try {
     const products = await serviceGetProducts(req.query);
     let isAdmin = isUserAdmin(user);
+    let isAdmin1 = isUserAdmin1(user);
     let isPremium = isUserPremium(user);
     const hasNextPage = products.hasNextPage;
     const hasPrevPage = products.hasPrevPage;
@@ -44,6 +49,7 @@ const getProducts = async (req, res) => {
       user,
       isPremium,
       isAdmin,
+      isAdmin1,
     });
   } catch (error) {
     res.status(500).send({ message: "Error trying to get all products" });
@@ -58,11 +64,9 @@ const getProductById = async (req, res) => {
     // Obtener los detalles del producto
     let product = await serviceGetProductById(id);
 
-    // Agregar un console.log para verificar los datos del producto
-    console.log("Datos del producto:", product);
-
     // Verificar si el usuario es administrador o premium
     let isAdmin = isUserAdmin(user);
+    let isAdmin1 = isUserAdmin1(user);
     let isPremium = isUserPremium(user);
 
     // Renderizar la plantilla con los datos del producto y otras variables
@@ -70,6 +74,7 @@ const getProductById = async (req, res) => {
       product,
       user,
       isAdmin,
+      isAdmin1, // Pasar la variable isAdmin1 a la plantilla
       isPremium,
       title: "Products",
       style: "index.css",
@@ -122,10 +127,23 @@ const getAdminView = async (req, res) => {
   }
 };
 
+const getAdminView1 = async (req, res) => {
+  try {
+    const idUsuario = req.usuario.id;
+    const products = await productModel.find({ createdBy: idUsuario });
+    console.log(products); // Verifica los datos que estás enviando
+    res.render("adminView1", { products });
+  } catch (error) {
+    console.error("Error al obtener los productos del usuario:", error);
+    res.status(500).send("Error interno del servidor");
+  }
+};
+
 export {
   getProducts,
   getProductById,
   updateProduct,
   getProductsFromPremiumUsers,
   getAdminView,
+  getAdminView1,
 };

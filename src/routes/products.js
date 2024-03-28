@@ -6,6 +6,7 @@ import {
   updateProduct,
 } from "../controllers/productManager.js";
 import { premiumOrAdmin } from "../middlewares/index.js";
+import { adminOnly1 } from "../middlewares/index.js";
 
 productsRouter.get("/", getProducts);
 productsRouter.get("/:pid", getProductById); // Aplica el middleware unrestrictedAccess aquí

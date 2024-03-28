@@ -52,6 +52,15 @@
                 </li>
 
               {{/if}}
+              {{#if isAdmin1}}
+                <li class="nav-item">
+                  <a
+                    class="nav-link btn btn-outline-primary"
+                    href="/auth/adminView1"
+                  >Perfil de Usuario</a>
+                </li>
+
+              {{/if}}
 
               <li class="nav-item">
                 <a class="nav-link" href="/auth/logout">Cerrar sesión</a>
