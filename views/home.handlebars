@@ -38,27 +38,55 @@
     <div class="containerProducts container">
 
       {{#if user}}
-        <h1>Bienvenido a Tags de Totinas!!!</h1>
+        <h1>Bienvenido a Tags de Totinas</h1>
       {{else}}
       {{/if}}
 
-      <div>
-        <h3>Diseñamos nuestros tags para que puedas almacenar información
-          esencial para todo lo que necesites identificar.</h3>
-        <h3>Configurarlo es muy facil, no obstante, te invitamos a ver nuestro
-          video explicativo para que te saques todas las dudas.</h3>
-        <h3>No dudes en contactarnos por consultas. Estamos aquí para ayudarte.</h3>
-      </div>
+      {{#if isAdmin1}}
+        <div class="admin1">
+          <div>
+            <h3>Diseñamos nuestros tags para que puedas almacenar información
+              esencial para todo lo que necesites identificar.</h3>
+            <h3>Configurarlo es muy facil, no obstante, te invitamos a ver
+              nuestro video explicativo para que te saques todas las dudas.</h3>
+            <h3>No dudes en contactarnos por consultas. Estamos aquí para
+              ayudarte.</h3>
+          </div>
 
-      <!-- Espacio entre el texto y el video -->
-      <div class="video-container embed-responsive embed-responsive-16by9">
-        <iframe
-          class="embed-responsive-item"
-          src="https://www.youtube.com/embed/MOqfSh-ivrk?si=L8pl74ofPZKv2oJi"
-          title="YouTube video player"
-          allowfullscreen
-        ></iframe>
-      </div>
+          <!-- Espacio entre el texto y el video -->
+          <div class="video-container embed-responsive embed-responsive-16by9">
+            <iframe
+              class="embed-responsive-item"
+              src="https://www.youtube.com/embed/MOqfSh-ivrk?si=L8pl74ofPZKv2oJi"
+              title="YouTube video player"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      {{else}}
+        <div class="admin2">
+
+          <div>
+            <h3>En nuestros tags, puedes almacenar información esencial de tus
+              mascotas, la cual puede resultar muy útil en caso de extravío para
+              quien las encuentre.</h3>
+            <h3>Configurarlos es muy sencillo. Te invitamos a ver nuestro video
+              explicativo para resolver cualquier duda.</h3>
+            <h3>No dudes en contactarnos si tienes consultas. Estamos aquí para
+              ayudarte.</h3>
+          </div>
+
+          <!-- Espacio entre el texto y el video -->
+          <div class="video-container embed-responsive embed-responsive-16by9">
+            <iframe
+              class="embed-responsive-item"
+              src="https://www.youtube.com/embed/MOqfSh-ivrk?si=L8pl74ofPZKv2oJi"
+              title="YouTube video player"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      {{/if}}
     </div>
 
     <div class="footer">
