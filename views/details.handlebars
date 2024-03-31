@@ -13,12 +13,13 @@
       body { background-size: cover; /* Ajusta la imagen para cubrir todo el
       fondo */ background-position: center; /* Centra la imagen en el fondo */
       background-repeat: no-repeat; /* Evita la repetición de la imagen */
-      {{#if isAdmin1}}
-        background-image:
-        url('https://p4.wallpaperbetter.com/wallpaper/561/441/224/minimalistic-dark-grey-textures-gradient-2000x1200-abstract-textures-hd-art-wallpaper-preview.jpg');
-      {{else}}
+      {{#if isPetFromProducts}}
         background-image:
         url('https://media.istockphoto.com/id/1417882544/es/foto/gran-grupo-de-gatos-y-perros-mirando-a-la-c%C3%A1mara-sobre-fondo-azul.jpg?s=612x612&w=0&k=20&c=24s5hhdBTwmBC5wS5fXqdlAJHGBYGoTmO0iY6IQFwWM=');
+
+      {{else}}
+        background-image:
+        url('https://p4.wallpaperbetter.com/wallpaper/561/441/224/minimalistic-dark-grey-textures-gradient-2000x1200-abstract-textures-hd-art-wallpaper-preview.jpg');
       {{/if}}
       } .containerDetails { min-height: 100vh; /* Establece la altura mínima del
       contenedor como el 100% del viewport height */ display: flex;
@@ -30,7 +31,10 @@
       inferior */ display: inline-block; /* Alinea la tarjeta gris como un
       bloque en línea */ } .card-gray h6 { margin-bottom: 0; /* Elimina el
       margen inferior del subtítulo */ } /* Estilos para el footer */ .footer {
-      text-align: center; margin-top: 20px; background-color: white;}
+      text-align: center; margin-top: 20px; background-color: white;} .logo
+      {width: 200px; height: auto;} .card img { max-width: 100%; /* La imagen se
+      ajustará al ancho de la tarjeta */ height: auto; /* La altura se ajustará
+      automáticamente según el ancho */ }
     </style>
   </head>
 
@@ -40,12 +44,7 @@
       <!-- Imagen del logo -->
 
       <!-- Card de Bootstrap para mostrar los datos de la mascota -->
-      {{#if isAdmin}}
-        <img
-          src="https://i.ibb.co/X2G7xgg/Logo-Veterinaria-Tienda-Mascotas-Simple-Beige-1-colores.png"
-          alt="Logo-Veterinaria-Tienda-Mascotas-Simple-Beige-1-colores"
-          class="logo"
-        />
+      {{#if isPetFromProducts}}
 
         <div class="card">
           <div class="card-body">
@@ -63,9 +62,15 @@
                 href="https://wa.me/+54{{thumbnail}}"
                 target="_blank"
               >{{product.thumbnail}}</a></p>
+            <p class="card-text">Correo electrónico: {{product.email}}</p>
 
             <p class="card-text">Si me encontraste, por favor teneme paciencia,
               voy a estar muy asustado.</p>
+            <img
+              src="https://i.ibb.co/X2G7xgg/Logo-Veterinaria-Tienda-Mascotas-Simple-Beige-1-colores.png"
+              alt="Logo-Veterinaria-Tienda-Mascotas-Simple-Beige-1-colores"
+              class="logo"
+            />
           </div>
         </div>
       {{else}}
@@ -83,6 +88,7 @@
                 target="_blank"
               >{{product.thumbnail}}</a></p>
             <p class="card-text">Correo electrónico: {{product.email}}</p>
+
           </div>
 
         </div>

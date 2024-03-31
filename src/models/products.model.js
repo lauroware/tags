@@ -28,4 +28,8 @@ const productSchema = new mongoose.Schema(
 productSchema.plugin(paginate);
 const productModel = mongoose.model("products", productSchema);
 
+productSchema.methods.isPet = function () {
+  return product.userId === "pet";
+};
+
 export { productModel, productSchema };

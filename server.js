@@ -31,6 +31,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
+Handlebars.registerHelper("isEqual", function (a, b, options) {
+  if (a === b) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
+
 app.engine("handlebars", engine());
 app.set("views", path.join(__dirname, "views")); // Corrige la ubicación de las vistas
 app.set("view engine", "handlebars");

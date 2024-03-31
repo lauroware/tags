@@ -16,6 +16,10 @@ const isUserAdmin1 = (user) => {
   return user && user.role === "admin1";
 };
 
+const isPet = (product) => {
+  return product?.userId === "pet";
+};
+
 const isUserPremium = (user) => {
   return user && user.role === "premium";
 };
@@ -68,11 +72,13 @@ const getProductById = async (req, res) => {
     let isAdmin = isUserAdmin(user);
     let isAdmin1 = isUserAdmin1(user);
     let isPremium = isUserPremium(user);
+    let isPetFromProducts = isPet(product);
 
     // Renderizar la plantilla con los datos del producto y otras variables
     res.render("details", {
       product,
       user,
+      isPetFromProducts,
       isAdmin,
       isAdmin1, // Pasar la variable isAdmin1 a la plantilla
       isPremium,
