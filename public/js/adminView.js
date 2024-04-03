@@ -1,5 +1,6 @@
 const updateProduct = async (pid) => {
   const data = {};
+  const newEmailP = document.getElementById(`newEmailP-${pid}`).value;
   const newEmail = document.getElementById(`newEmail-${pid}`).value;
   const newTitle = document.getElementById(`newTitle-${pid}`).value;
   const newDescription = document.getElementById(`newDescription-${pid}`).value;
@@ -19,6 +20,7 @@ const updateProduct = async (pid) => {
   const newTelefono = document.getElementById(`newTelefono-${pid}`).value;
 
   if (
+    newEmailP ||
     newEmail ||
     newTitle ||
     newDescription ||
@@ -32,6 +34,7 @@ const updateProduct = async (pid) => {
     data.pid = pid;
     data.updates = {
       email: newEmail,
+      emailP: newEmailP,
       title: newTitle,
       title: newTitle,
       description: newDescription,

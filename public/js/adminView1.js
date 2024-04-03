@@ -1,5 +1,6 @@
 const updateProduct = async (pid) => {
   const data = {};
+  const newEmailP = document.getElementById(`newEmailP-${pid}`).value;
   const newEmail = document.getElementById(`newEmail-${pid}`).value;
   const newDescription = document.getElementById(`newDescription-${pid}`).value;
   const newNombredelhumano = document.getElementById(
@@ -11,6 +12,7 @@ const updateProduct = async (pid) => {
     data.pid = pid;
     data.updates = {
       email: newEmail,
+      emailP: newEmailP,
       description: newDescription,
       nombredelhumano: newNombredelhumano,
       telefono: newTelefono,

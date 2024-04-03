@@ -9,6 +9,7 @@ const productDtoFromObject = (obj) => {
   const {
     _id,
     email,
+    emailP,
     title,
     thumbnail,
     description,
@@ -23,6 +24,7 @@ const productDtoFromObject = (obj) => {
   return new ProductDTO(
     _id,
     email,
+    emailP,
     title,
     thumbnail,
     description,
@@ -41,6 +43,7 @@ const allProductsFromObject = (products) => {
     const {
       _id,
       email,
+      emailP,
       title,
       description,
       fechadenacimiento,
@@ -55,6 +58,7 @@ const allProductsFromObject = (products) => {
     return new ProductDTO(
       _id,
       email,
+      emailP,
       title,
       description,
       fechadenacimiento,

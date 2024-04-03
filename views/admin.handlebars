@@ -27,8 +27,8 @@
       Tu número de tag es
       {{user.tag}}.
       <br />
-      Por favor actualizá tu correo electrónico, se te solicitará en caso de que
-      necesites recordar tu contraseña.
+      Por favor actualizá tu correo electrónico privado, se te solicitará en
+      caso de que necesites recordar tu contraseña.
     </h1>
   </div>
 
@@ -68,6 +68,15 @@
               name="tag"
               value="{{tag}}"
               readonly
+            />
+            <label for="tag">Email privado (no se mostrará en la página
+              pública):</label>
+            <input
+              id="newEmailP-{{_id}}"
+              class="form-control"
+              type="text"
+              name="emailP"
+              value="{{emailP}}"
             />
             <label for="tag">Email:</label>
             <input
