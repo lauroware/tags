@@ -1,5 +1,4 @@
 <html lang="es">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,61 +15,48 @@
     <style>
       /* Estilo para el fondo negro del navbar */ .navbar { background-color:
       #000; } /* Estilo para los enlaces de la izquierda */ .navbar-nav
-      .nav-link { color: white; } /* Estilos personalizados solo a los enlaces
-      de la izquierda */ .navbar-nav .nav-link:not(.btn) { padding: 10px 20px; }
-      /* Estilos personalizados para los enlaces cuando el mouse está sobre
-      ellos */ .navbar-nav .nav-link:hover, .navbar-nav .nav-link:focus { color:
-      lightblue; /* Cambia el color al pasar el mouse o enfocar */
-      text-decoration: none; /* Quita el subrayado al pasar el mouse o enfocar
-      */ } /* Estilos personalizados solo a los botones del lado derecho */
-      .navbar-nav .nav-link.btn { background-color: transparent; border: none; }
+      .nav-link { color: white; padding: 10px 20px; } /* Estilos personalizados
+      para los enlaces cuando el mouse está sobre ellos */ .navbar-nav
+      .nav-link:hover, .navbar-nav .nav-link:focus { color: lightblue;
+      text-decoration: none; } /* Estilos personalizados solo a los botones del
+      lado derecho */ .navbar-nav .nav-link.btn { background-color: transparent;
+      border: none; }
     </style>
-
   </head>
-
   <body>
     {{#if user}}
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <div
-            class="collapse navbar-collapse d-flex justify-content-between"
-            id="navbarNav"
-          >
-            <ul class="navbar-nav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                aria-current="page"
+                href="/api/products"
+              >Inicio</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            {{#if isAdmin}}
               <li class="nav-item">
                 <a
-                  class="nav-link"
-                  aria-current="page"
-                  href="/api/products"
-                >Inicio</a>
+                  class="nav-link btn btn-outline-primary"
+                  href="/auth/adminView"
+                >Perfil de Usuario</a>
               </li>
-
-            </ul>
-            <ul class="navbar-nav">
-              {{#if isAdmin}}
-                <li class="nav-item">
-                  <a
-                    class="nav-link btn btn-outline-primary"
-                    href="/auth/adminView"
-                  >Perfil de Usuario</a>
-                </li>
-
-              {{/if}}
-              {{#if isAdmin1}}
-                <li class="nav-item">
-                  <a
-                    class="nav-link btn btn-outline-primary"
-                    href="/auth/adminView1"
-                  >Perfil de Usuario</a>
-                </li>
-
-              {{/if}}
-
+            {{/if}}
+            {{#if isAdmin1}}
               <li class="nav-item">
-                <a class="nav-link" href="/auth/logout">Cerrar sesión</a>
+                <a
+                  class="nav-link btn btn-outline-primary"
+                  href="/auth/adminView1"
+                >Perfil de Usuario</a>
               </li>
-            </ul>
-          </div>
+            {{/if}}
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/logout">Cerrar sesión</a>
+            </li>
+          </ul>
         </div>
       </nav>
       {{{body}}}

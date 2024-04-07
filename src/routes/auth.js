@@ -46,6 +46,13 @@ authRouter.put(
   updateUserEmail
 );
 
+authRouter.put(
+  "/adminView1/users/:uid",
+  adminOnly,
+  updateUserRole,
+  updateUserEmail
+);
+
 authRouter.delete(
   "/adminView/users",
   adminOnly,

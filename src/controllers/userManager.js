@@ -95,6 +95,7 @@ const updateUserRole = async (req, res) => {
       .send({ status: "error", payload: "Error updating user role" });
   }
 };
+
 const updateUserEmail = async (req, res) => {
   const { uid, newEmail } = req.body;
   try {

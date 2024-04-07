@@ -67,3 +67,29 @@ const updateProduct = async (pid) => {
       console.error("Error updating product:", error);
     });
 };
+
+const updateUserEmail = async (uid) => {
+  const newEmail = document.getElementById(`newEmail-${uid}`).value;
+  const data = {};
+
+  if (newEmail) {
+    data.uid = uid;
+    data.newEmail = newEmail;
+  }
+  await fetch(`${window.location.href}/users/${uid}`, {
+    method: "put",
+    mode: "cors",
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then(() => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("Error updating user role:", error);
+    });
+};

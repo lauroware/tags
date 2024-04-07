@@ -39,3 +39,33 @@ const updateProduct = async (pid) => {
       console.error("Error updating product:", error);
     });
 };
+
+const updateUserEmail = async (uid) => {
+  const data = {};
+  const newEmail = document.getElementById(`newEmail-${uid}`).value;
+  if (newEmail) {
+    data.uid = uid;
+    data.updates = {
+      email: newEmail,
+    };
+  }
+  await fetch(
+    `${window.location.protocol}//${window.location.host}/users/${uid}`,
+    {
+      method: "put",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  )
+    .then((response) => response.json())
+    .then((res) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.error("Error updating user email:", error);
+    });
+};
