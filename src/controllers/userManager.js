@@ -174,6 +174,10 @@ const isUserAdmin1 = (user) => {
   return user && user.role === "admin1";
 };
 
+const isUserAdmin2 = (user) => {
+  return user && user.role === "admin2";
+};
+
 const adminView = async (req, res) => {
   const allUsers = await serviceGetAllUsers();
   const allProducts = await serviceProductsFromDTO();
@@ -222,6 +226,30 @@ const adminView1 = async (req, res) => {
   });
 };
 
+const adminView2 = async (req, res) => {
+  const allUsers = await serviceGetAllUsers();
+  const allProducts = await serviceProductsFromDTO();
+  const user = req.session.user;
+  // console.log('session',req.session);
+  console.log("allProducts", allProducts);
+  const isAdmin2 = isUserAdmin2(user);
+  // console.log('asdasdadmin');
+  const userProduct = allProducts.find((product) => product.tag === user.tag);
+  console.log("userProduct", userProduct);
+  // console.log('allProducts',allProducts[0])
+
+  // Verificar si se encontró un producto para el usuario actual
+  const filteredProducts = userProduct ? [userProduct] : [];
+
+  res.render("admin2", {
+    user,
+    isAdmin2,
+    allUsers,
+    allProducts: filteredProducts,
+    style: "index.css",
+  });
+};
+
 const logout = (req, res) => {
   req.session.destroy((err) => {
     if (!err) {
@@ -239,6 +267,7 @@ export {
   deleteUserById,
   adminView,
   adminView1,
+  adminView2,
   updateUserRole,
   updateUserEmail,
   restorePassword,

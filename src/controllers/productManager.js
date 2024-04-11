@@ -16,8 +16,16 @@ const isUserAdmin1 = (user) => {
   return user && user.role === "admin1";
 };
 
+const isUserAdmin2 = (user) => {
+  return user && user.role === "admin2";
+};
+
 const isPet = (product) => {
   return product?.userId === "pet";
+};
+
+const isPerson = (product) => {
+  return product?.userId === "person";
 };
 
 const isUserPremium = (user) => {
@@ -30,6 +38,7 @@ const getProducts = async (req, res) => {
     const products = await serviceGetProducts(req.query);
     let isAdmin = isUserAdmin(user);
     let isAdmin1 = isUserAdmin1(user);
+    let isAdmin2 = isUserAdmin2(user);
     let isPremium = isUserPremium(user);
     const hasNextPage = products.hasNextPage;
     const hasPrevPage = products.hasPrevPage;
@@ -54,6 +63,7 @@ const getProducts = async (req, res) => {
       isPremium,
       isAdmin,
       isAdmin1,
+      isAdmin2,
     });
   } catch (error) {
     res.status(500).send({ message: "Error trying to get all products" });
@@ -71,16 +81,20 @@ const getProductById = async (req, res) => {
     // Verificar si el usuario es administrador o premium
     let isAdmin = isUserAdmin(user);
     let isAdmin1 = isUserAdmin1(user);
+    let isAdmin2 = isUserAdmin2(user);
     let isPremium = isUserPremium(user);
     let isPetFromProducts = isPet(product);
+    let isPersonFromProducts = isPerson(product);
 
     // Renderizar la plantilla con los datos del producto y otras variables
     res.render("details", {
       product,
       user,
       isPetFromProducts,
+      isPersonFromProducts,
       isAdmin,
-      isAdmin1, // Pasar la variable isAdmin1 a la plantilla
+      isAdmin1,
+      isAdmin2, // Pasar la variable isAdmin1 a la plantilla
       isPremium,
       title: "Products",
       style: "index.css",
@@ -145,6 +159,18 @@ const getAdminView1 = async (req, res) => {
   }
 };
 
+const getAdminView2 = async (req, res) => {
+  try {
+    const idUsuario = req.usuario.id;
+    const products = await productModel.find({ createdBy: idUsuario });
+    console.log(products); // Verifica los datos que estás enviando
+    res.render("adminView2", { products });
+  } catch (error) {
+    console.error("Error al obtener los productos del usuario:", error);
+    res.status(500).send("Error interno del servidor");
+  }
+};
+
 export {
   getProducts,
   getProductById,
@@ -152,4 +178,5 @@ export {
   getProductsFromPremiumUsers,
   getAdminView,
   getAdminView1,
+  getAdminView2,
 };

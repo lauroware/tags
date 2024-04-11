@@ -33,4 +33,8 @@ productSchema.methods.isPet = function () {
   return product.userId === "pet";
 };
 
+productSchema.methods.isPerson = function () {
+  return product.userId === "person";
+};
+
 export { productModel, productSchema };

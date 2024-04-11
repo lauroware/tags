@@ -67,7 +67,7 @@
             ></iframe>
           </div>
         </div>
-      {{else}}
+      {{else if isAdmin}}
         <div class="admin2">
 
           <div>
@@ -93,6 +93,31 @@
               allowfullscreen
             ></iframe>
           </div>
+        </div>
+      {{else}}
+        <div class="admin2">
+          <div>
+            <h3>En nuestros tags, puedes almacenar información esencial que
+              necesites recordar, la cual puede resultar muy útil ante
+              urgencias.</h3>
+            <h3>Configurarlos es muy sencillo. Te invitamos a ver nuestro video
+              explicativo para resolver cualquier duda.</h3>
+            <h3>No dudes en contactarnos si tienes consultas. Estamos aquí para
+              ayudarte.</h3>
+          </div>
+        </div>
+        <!-- Espacio entre el texto y el video -->
+        <div class="video-container embed-responsive embed-responsive-16by9">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/3FWgyAmSA2E?si=WR3CpIGp8WdbSpNn"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
         </div>
       {{/if}}
     </div>

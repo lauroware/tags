@@ -17,6 +17,10 @@
         background-image:
         url('https://media.istockphoto.com/id/1417882544/es/foto/gran-grupo-de-gatos-y-perros-mirando-a-la-c%C3%A1mara-sobre-fondo-azul.jpg?s=612x612&w=0&k=20&c=24s5hhdBTwmBC5wS5fXqdlAJHGBYGoTmO0iY6IQFwWM=');
 
+      {{else if isPersonFromProducts}}
+        background-image:
+        url('https://img.freepik.com/free-vector/geometric-background_53876-115958.jpg');
+
       {{else}}
         background-image:
         url('https://p4.wallpaperbetter.com/wallpaper/561/441/224/minimalistic-dark-grey-textures-gradient-2000x1200-abstract-textures-hd-art-wallpaper-preview.jpg');
@@ -73,6 +77,31 @@
             />
           </div>
         </div>
+      {{else if isPersonFromProducts}}
+        <!-- Segundo condicional -->
+
+        <div class="card">
+          <div class="card-body">
+            <img src="{{product.description}}" alt="" />
+            <h1 class="card-title">Hola, soy {{product.title}}</h1>
+            <h6 class="card-subtitle mb-2 text-muted">Sobre mi:
+              {{product.fechadenacimiento}}</h6>
+            <p class="card-text">Fecha de nacimiento:
+              {{product.medicamentos}}</p>
+            <p class="card-text">Medicamentos: {{product.enfermedades}}</p>
+            <p class="card-text">Historia clínica:
+              {{product.nombredelhumano}}</p>
+            <p class="card-text">Contacto de referencia:
+              {{product.telefono}}</p>
+            <p class="card-text">Teléfono:
+              <a
+                href="https://wa.me/+54{{thumbnail}}"
+                target="_blank"
+              >{{product.thumbnail}}</a></p>
+            <p class="card-text">Dirección: {{product.email}}</p>
+          </div>
+        </div>
+
       {{else}}
         <div class="card">
           <div class="card-body">
